@@ -2,7 +2,8 @@
 
 Git-versioned Acumatica configuration for **LAB5 Distribution**, a distribution demo company used for the [lab5.ca](https://lab5.ca) **Demo Tenant Factory** sales pitch.
 
-Rebuild from empty → company + masters + linked transaction history (buy → assemble → sell → invoice → collect). Not a production ERP.
+Rebuild from empty to company, masters, and linked transaction history (buy, assemble, sell, invoice, collect).
+Not a production ERP.
 
 Requires the [`acu` CLI](https://github.com/kborovik/acumatica-cli) (PyPI: `acumatica-cli`).
 
@@ -22,7 +23,8 @@ Requires the [`acu` CLI](https://github.com/kborovik/acumatica-cli) (PyPI: `acum
 
 ## Quick rebuild
 
-**Start from a brand-new empty tenant.** Do not apply onto a half-configured company.
+**Start from a brand-new empty tenant.**
+Do not apply onto a half-configured company.
 
 ```sh
 # 1. Credentials (local)
@@ -48,11 +50,12 @@ Scenario re-runs are safe on a warm tenant (document numbers change; delta expec
 
 ## Pitch path
 
-See [docs/pitch-walkthrough.md](docs/pitch-walkthrough.md). Short version:
+See [docs/pitch-walkthrough.md](docs/pitch-walkthrough.md).
+Short version:
 
 1. Company **LAB5 Distribution**
 2. Stock at **WH01** after buy/build
-3. Sales order → shipment → invoice → payment (ACMEMFG paid; others open AR)
+3. Sales order, shipment, invoice, payment (ACMEMFG paid; others open AR)
 
 ## Non-goals
 
@@ -62,4 +65,5 @@ See [docs/pitch-walkthrough.md](docs/pitch-walkthrough.md). Short version:
 
 ## Target matrix
 
-See `target.yaml` (ERP build + Default API version). Live `acu` commands fail when `ACU_API_VERSION` disagrees with `default_api`.
+See `target.yaml` (ERP build + Default API version).
+Live `acu` commands fail when `ACU_API_VERSION` disagrees with `default_api`.

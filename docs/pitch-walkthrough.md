@@ -13,15 +13,15 @@ Company: **LAB5 Distribution** (`AcctCD: LAB5`). Rebuild: see root `README.md`.
 | 3. Sales order | Sales Orders (SO301000) | Order for ACMEMFG / NORTHGRID / AGRISENSE | scenario `so-*` steps; customers `master/76-customers.yaml` |
 | 4. Shipment | Shipments (SO302000) | Confirmed shipment from WH01 | `SalesOrderCreateShipment` + `ConfirmShipment` |
 | 5. Invoice | Invoices (SO303000) | Open / closed invoice | `PrepareInvoice` + `ReleaseSalesInvoice` |
-| 6. Payment | Payments (AR302000) | ACMEMFG paid in full (WIRE → 10100) | `pay-acme` + `ReleasePayment` |
+| 6. Payment | Payments (AR302000) | ACMEMFG paid in full (WIRE to 10100) | `pay-acme` + `ReleasePayment` |
 | 7. AR open | Customer details / AR balance | NORTHGRID + AGRISENSE invoices still open | scenario leaves those invoices Open (linked history, V3) |
-| 8. Clean rebuild | CLI | Empty tenant → apply → run → clean diff | README rebuild steps (V7) |
+| 8. Clean rebuild | CLI | Empty tenant, apply, run, clean diff | README rebuild steps (V7) |
 
 ## Linked chain (V3)
 
 ```
-Vendor (SHENZHEN…) → PO → Purchase Receipt → (kit assembly) →
-Customer (ACMEMFG…) → SO → Shipment → Invoice → Payment
+Vendor (SHENZHEN…) to PO to Purchase Receipt to (kit assembly) to
+Customer (ACMEMFG…) to SO to Shipment to Invoice to Payment
 ```
 
 No orphan demo docs: every scenario document references a prior captured number (`${po_*}`, `${ship_*}`, `${inv_*}`).
