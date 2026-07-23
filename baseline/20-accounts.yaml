@@ -1,6 +1,7 @@
-# Chart of accounts (GL202500) via the Default endpoint - a minimal
-# generic chart: one account per major role, including the retained
-# earnings (32000) and YTD net income (33000) accounts that
+# Chart of accounts (GL202500) via the Default endpoint - distribution
+# pitch depth for LAB5 Distribution: cash/AR/AP, inventory asset + PO
+# accrual, sales + freight revenue, COGS + freight expense + inventory
+# adjust, plus retained earnings (32000) and YTD net income (33000) that
 # 50-gl-preferences.yaml references. Server-derived fields
 # (ChartOfAccountsOrder, CashAccount) are omitted deliberately: the
 # server keeps its own derivation, so a sourced value diffs dirty
@@ -12,6 +13,7 @@
 entity: Account
 key: AccountCD
 records:
+# --- Assets ---
 - AccountCD: '10100'
   Active: true
   Description: Cash
@@ -28,9 +30,34 @@ records:
   Secured: false
   Type: Asset
   UseDefaultSubaccount: false
+- AccountCD: '12000'
+  Active: true
+  Description: Inventory
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Asset
+  UseDefaultSubaccount: false
+- AccountCD: '12100'
+  Active: true
+  Description: Inventory In Transit
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Asset
+  UseDefaultSubaccount: false
+# --- Liabilities ---
 - AccountCD: '20000'
   Active: true
   Description: Accounts Payable
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Liability
+  UseDefaultSubaccount: false
+- AccountCD: '20100'
+  Active: true
+  Description: PO Accrual
   PostOption: Summary
   RequireUnits: false
   Secured: false
@@ -44,6 +71,7 @@ records:
   Secured: false
   Type: Liability
   UseDefaultSubaccount: false
+# --- Equity / close ---
 - AccountCD: '30100'
   Active: true
   Description: Capital Stock
@@ -68,6 +96,7 @@ records:
   Secured: false
   Type: Liability
   UseDefaultSubaccount: false
+# --- Income ---
 - AccountCD: '40000'
   Active: true
   Description: Sales Revenue
@@ -76,9 +105,42 @@ records:
   Secured: false
   Type: Income
   UseDefaultSubaccount: false
+- AccountCD: '41000'
+  Active: true
+  Description: Freight Revenue
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Income
+  UseDefaultSubaccount: false
+- AccountCD: '49000'
+  Active: true
+  Description: Sales Discounts
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Income
+  UseDefaultSubaccount: false
+# --- Expense ---
 - AccountCD: '50000'
   Active: true
   Description: Cost of Goods Sold
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Expense
+  UseDefaultSubaccount: false
+- AccountCD: '51000'
+  Active: true
+  Description: Freight Expense
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Expense
+  UseDefaultSubaccount: false
+- AccountCD: '52000'
+  Active: true
+  Description: Inventory Adjustments
   PostOption: Summary
   RequireUnits: false
   Secured: false
