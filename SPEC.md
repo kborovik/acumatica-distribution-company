@@ -43,7 +43,7 @@ T1|x|set company AcctName LAB5 Distribution; align AcctCD + ledger-company + ope
 T2|x|expand distribution COA (inventory asset, COGS, sales, freight, AP/AR depth as pitch needs)|V6
 T3|x|enable inventory prefs + warehouse + location seed under master/|V4,V5
 T4|x|seed stock items + UOMs (PIECE/each + distribution units) w/ costs|V6
-T5|.|seed customers + vendors + credit terms used by scenarios|V3
+T5|x|seed customers + vendors + credit terms used by scenarios|V3
 T6|.|seed PO → receipt path so on-hand qty exists pre-sales demo|V3,V6
 T7|.|seed SO → shipment → invoice → payment chain (linked)|V3,V6
 T8|.|document pitch walkthrough (screen path + which seed rows drive each beat)|V1,V6
