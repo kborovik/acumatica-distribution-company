@@ -1,16 +1,17 @@
-# Units of measure (CS203500) via the Default endpoint - a minimal valid
-# seed file: entity + key + records. Verify against the live tenant with:
-#   acu diff baseline/90-uoms.yaml
-#
-# APPLY ORDER (dir expansion sorts *.yaml alphabetically; numbered
-# prefixes encode order): units reference nothing, so this file sorts
-# last.
+# Units of measure (CS203500) via the Default endpoint - EA for stock
+# items; BOX second unit; PIECE/HOUR retained from scaffold.
 entity: UnitsOfMeasure
 key: UnitID
 records:
-- UnitID: HOUR
-  Description: Hour
-  L3Code: HUR
+- UnitID: EA
+  Description: Each
+  L3Code: EA
+- UnitID: BOX
+  Description: Box
+  L3Code: EA
 - UnitID: PIECE
   Description: Piece
   L3Code: PCB
+- UnitID: HOUR
+  Description: Hour
+  L3Code: HUR
