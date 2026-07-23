@@ -1,22 +1,36 @@
-# Chart of accounts (GL202500) via the Default endpoint - distribution
-# pitch depth for LAB5 Distribution: cash/AR/AP, inventory asset + PO
-# accrual, sales + freight revenue, COGS + freight expense + inventory
-# adjust, plus retained earnings (32000) and YTD net income (33000) that
-# 50-gl-preferences.yaml references. Server-derived fields
-# (ChartOfAccountsOrder, CashAccount) are omitted deliberately: the
-# server keeps its own derivation, so a sourced value diffs dirty
-# forever.
+# Chart of accounts (GL202500), designed for LAB5 Distribution (lab5.ca demo tenant seed) - 23 accounts covering GL foundation plus the
+# AP/AR/IN/SO/PO posting resolution the buy-build-sell scenario needs.
+# Field shape live-verified on 26.101.0225 by the earlier SalesDemo
+# replay (T24). Stripped per that work: internal AccountID, AccountClass
+# (no Default-endpoint entity), AccountGroup (PM - absent on a fresh
+# tenant, PUT 422s), RevaluationRateType, and the server-derived
+# ChartOfAccountsOrder + CashAccount (PUT-tolerated but the server keeps
+# its own derivation, so any sourced value diffs dirty forever - B11).
+# CurrencyID only on denominated cash accounts (the SalesDemo extract
+# carried it on 11 cash accounts only). Equity accounts are Type:
+# Liability - the Account.Type list has no Equity value.
 #
 # APPLY ORDER (dir expansion sorts *.yaml alphabetically; numbered
-# prefixes encode order): this file must apply before
-# 50-gl-preferences.yaml, which references accounts 32000 and 33000.
+# prefixes encode order): after 10-subaccounts.yaml; before
+# 32-gl-preferences.yaml, which references 32000/33000 below. FX
+# gain/loss accounts (83xxx/84000) intentionally absent - USD-only
+# tenant; add them only if AR/AP release proves to need a financial
+# currency row (plan risk R4).
 entity: Account
 key: AccountCD
 records:
-# --- Assets ---
 - AccountCD: '10100'
   Active: true
-  Description: Cash
+  CurrencyID: USD
+  Description: Checking Account
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Asset
+  UseDefaultSubaccount: false
+- AccountCD: '10200'
+  Active: true
+  Description: Cash In Transit
   PostOption: Detail
   RequireUnits: false
   Secured: false
@@ -30,15 +44,31 @@ records:
   Secured: false
   Type: Asset
   UseDefaultSubaccount: false
-- AccountCD: '12000'
+- AccountCD: '12100'
   Active: true
-  Description: Inventory
+  Description: Inventory - Components
   PostOption: Detail
   RequireUnits: false
   Secured: false
   Type: Asset
   UseDefaultSubaccount: false
-- AccountCD: '12100'
+- AccountCD: '12200'
+  Active: true
+  Description: Inventory - Finished Goods
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Asset
+  UseDefaultSubaccount: false
+- AccountCD: '12300'
+  Active: true
+  Description: Work In Progress
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Asset
+  UseDefaultSubaccount: false
+- AccountCD: '12400'
   Active: true
   Description: Inventory In Transit
   PostOption: Detail
@@ -46,8 +76,23 @@ records:
   Secured: false
   Type: Asset
   UseDefaultSubaccount: false
-# --- Liabilities ---
-- AccountCD: '20000'
+- AccountCD: '15000'
+  Active: true
+  Description: Prepaid Expenses
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Asset
+  UseDefaultSubaccount: false
+- AccountCD: '16000'
+  Active: true
+  Description: Office Equipment
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Asset
+  UseDefaultSubaccount: false
+- AccountCD: '20100'
   Active: true
   Description: Accounts Payable
   PostOption: Summary
@@ -55,26 +100,33 @@ records:
   Secured: false
   Type: Liability
   UseDefaultSubaccount: false
-- AccountCD: '20100'
+- AccountCD: '20200'
   Active: true
   Description: PO Accrual
+  PostOption: Detail
+  RequireUnits: false
+  Secured: false
+  Type: Liability
+  UseDefaultSubaccount: false
+- AccountCD: '22000'
+  Active: true
+  Description: Accrued Expenses
   PostOption: Summary
   RequireUnits: false
   Secured: false
   Type: Liability
   UseDefaultSubaccount: false
-- AccountCD: '24100'
+- AccountCD: '24000'
   Active: true
-  Description: Tax Payable
+  Description: Sales Tax Payable
   PostOption: Summary
   RequireUnits: false
   Secured: false
   Type: Liability
   UseDefaultSubaccount: false
-# --- Equity / close ---
-- AccountCD: '30100'
+- AccountCD: '30000'
   Active: true
-  Description: Capital Stock
+  Description: Owner Capital
   PostOption: Summary
   RequireUnits: false
   Secured: false
@@ -96,18 +148,17 @@ records:
   Secured: false
   Type: Liability
   UseDefaultSubaccount: false
-# --- Income ---
 - AccountCD: '40000'
   Active: true
-  Description: Sales Revenue
+  Description: Sales - Gateways
   PostOption: Summary
   RequireUnits: false
   Secured: false
   Type: Income
   UseDefaultSubaccount: false
-- AccountCD: '41000'
+- AccountCD: '40100'
   Active: true
-  Description: Freight Revenue
+  Description: Sales - Services
   PostOption: Summary
   RequireUnits: false
   Secured: false
@@ -121,24 +172,39 @@ records:
   Secured: false
   Type: Income
   UseDefaultSubaccount: false
-# --- Expense ---
+- AccountCD: '49100'
+  Active: true
+  Description: Purchase Discounts Taken
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Income
+  UseDefaultSubaccount: false
 - AccountCD: '50000'
   Active: true
-  Description: Cost of Goods Sold
+  Description: COGS - Gateways
   PostOption: Summary
   RequireUnits: false
   Secured: false
   Type: Expense
   UseDefaultSubaccount: false
-- AccountCD: '51000'
+- AccountCD: '50100'
   Active: true
-  Description: Freight Expense
+  Description: Purchase Price Variance
   PostOption: Summary
   RequireUnits: false
   Secured: false
   Type: Expense
   UseDefaultSubaccount: false
-- AccountCD: '52000'
+- AccountCD: '50200'
+  Active: true
+  Description: Landed Cost Variance
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Expense
+  UseDefaultSubaccount: false
+- AccountCD: '50300'
   Active: true
   Description: Inventory Adjustments
   PostOption: Summary
@@ -148,7 +214,23 @@ records:
   UseDefaultSubaccount: false
 - AccountCD: '60000'
   Active: true
-  Description: Operating Expenses
+  Description: Freight Expense
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Expense
+  UseDefaultSubaccount: false
+- AccountCD: '61000'
+  Active: true
+  Description: Office Expense
+  PostOption: Summary
+  RequireUnits: false
+  Secured: false
+  Type: Expense
+  UseDefaultSubaccount: false
+- AccountCD: '62000'
+  Active: true
+  Description: Bank Charges
   PostOption: Summary
   RequireUnits: false
   Secured: false
