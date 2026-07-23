@@ -4,7 +4,7 @@
 # (unfollowable over the contract API), so the seed drives GL503000
 # directly: the record sets the processing filter (Action takes the
 # stored word 'Open'; OrganizationID is the org CD through the
-# Organization selector - COMPANY, the organization
+# Organization selector - LAB5, the organization
 # bootstrap/company.yaml creates), and ProcessAll processes every period
 # the filter matches - no per-row selection involved.
 #
@@ -27,7 +27,7 @@ record:
   Action: Open
   FromYear: "2026"
   ToYear: "2026"
-  OrganizationID: COMPANY
+  OrganizationID: LAB5
 done_when:
   entity: CompanyPeriod
   filter: FinancialYear eq '2026' and Status eq 'Open'

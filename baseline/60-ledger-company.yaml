@@ -17,11 +17,11 @@
 #
 # APPLY ORDER (dir expansion sorts *.yaml alphabetically; numbered
 # prefixes encode order): after 40-ledger.yaml - the ACTUAL ledger must
-# exist; the COMPANY organization exists from the bootstrap/ phase
+# exist; the LAB5 organization exists from the bootstrap/ phase
 # (company.yaml).
 entity: LedgerCompany
 key: [LedgerCD, OrganizationID]
 endpoint: bootstrap
 records:
 - LedgerCD: ACTUAL
-  OrganizationID: COMPANY
+  OrganizationID: LAB5

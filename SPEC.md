@@ -39,7 +39,7 @@ V8: no-secrets-in-seed — seed YAML + committed docs never contain passwords, A
 ## §T TASKS
 
 id|status|task|cites
-T1|.|set company AcctName LAB5 Distribution; align AcctCD + ledger-company + open-periods refs|V2
+T1|x|set company AcctName LAB5 Distribution; align AcctCD + ledger-company + open-periods refs|V2
 T2|.|expand distribution COA (inventory asset, COGS, sales, freight, AP/AR depth as pitch needs)|V6
 T3|.|enable inventory prefs + warehouse + location seed under master/|V4,V5
 T4|.|seed stock items + UOMs (PIECE/each + distribution units) w/ costs|V6
