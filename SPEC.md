@@ -44,7 +44,7 @@ T2|x|expand distribution COA (inventory asset, COGS, sales, freight, AP/AR depth
 T3|x|enable inventory prefs + warehouse + location seed under master/|V4,V5
 T4|x|seed stock items + UOMs (PIECE/each + distribution units) w/ costs|V6
 T5|x|seed customers + vendors + credit terms used by scenarios|V3
-T6|.|seed PO → receipt path so on-hand qty exists pre-sales demo|V3,V6
+T6|x|seed PO → receipt path so on-hand qty exists pre-sales demo|V3,V6
 T7|.|seed SO → shipment → invoice → payment chain (linked)|V3,V6
 T8|.|document pitch walkthrough (screen path + which seed rows drive each beat)|V1,V6
 T9|.|`acu apply` full seed + `acu diff` green on target tenant|V7
